@@ -12,7 +12,7 @@ class MobikulFacebookSigninView: UIView {
     @IBOutlet weak var fbBtn: UIButton!
     
     override func awakeFromNib() {
-        fbBtn.setImage(UIImage(named: "facebook.pdf"), for: UIControlState.normal)
+        fbBtn.setImage(UIImage(named: "facebook.pdf"), for: UIControl.State.normal)
     }
     
     /*

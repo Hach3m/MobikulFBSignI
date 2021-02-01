@@ -22,10 +22,10 @@ class MobikulFBSignIn: NSObject{
     
     func fbLogin(view: UIViewController) {
         
-        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
-        fbLoginManager.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: view) { (result, error) -> Void in
+        let fbLoginManager : LoginManager = LoginManager()
+        fbLoginManager.logIn(permissions: ["public_profile", "email", "user_friends"], from: view) { (result, error) -> Void in
             if (error == nil){
-                if let fbloginresult : FBSDKLoginManagerLoginResult = (result)
+                if let fbloginresult : LoginManagerLoginResult = (result)
                 {
                     if(fbloginresult.isCancelled){
                         
@@ -42,8 +42,8 @@ class MobikulFBSignIn: NSObject{
     }
     
     func getFBUserData(){
-        if((FBSDKAccessToken.current()) != nil){
-            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
+        if((AccessToken.current) != nil){
+            GraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
                 if (error == nil){
                     let Dict  = result as? [String : Any]
                     NotificationCenter.default.post(name:  NSNotification.Name(rawValue: "MobikulFBSignIn"), object: nil, userInfo: Dict)
